@@ -335,7 +335,7 @@ class Wallet:
             return {"name": None, "type": None, "pubkey": pub}
         else:
             try:
-                account = Account(name)
+                account = Account(name, steemd_instance=self.steemd)
             except:  # noqa FIXME(sneak)
                 return
             keyType = self.getKeyType(account, pub)

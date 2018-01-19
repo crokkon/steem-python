@@ -589,7 +589,7 @@ class Commit(object):
             remaining_fee = required_fee_steem - delegation_fee_steem
             if remaining_fee > 0:
                 required_sp = remaining_fee * delegated_sp_fee_mult
-                required_fee_vests = Converter().sp_to_vests(required_sp) + 1
+                required_fee_vests = Converter(self.steemd).sp_to_vests(required_sp) + 1
 
         s = {
             'creator': creator,
@@ -898,7 +898,7 @@ class Commit(object):
         if none(
                 int(first(x.split(' ')))
                 for x in [reward_sbd, reward_steem, reward_vests]):
-            a = Account(account)
+            a = Account(account, steemd_instance=self.steemd)
             reward_steem = a['reward_steem_balance']
             reward_sbd = a['reward_sbd_balance']
             reward_vests = a['reward_vesting_balance']
